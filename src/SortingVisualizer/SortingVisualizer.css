@@ -1,0 +1,36 @@
+.array-container {
+  position: center;
+  padding-top: 60px;
+  left: 100px;
+}
+
+.array-bar {
+  width: 2px;
+  background-color: lightcoral;
+  display: inline-block;
+  margin: 0 1px;
+}
+
+.tool-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  background-color: grey;
+}
+
+.tool-bar button {
+  background: white;
+  border-style: hidden;
+  font-size: 16px;
+  font-family: "Times New Roman", Times, serif;
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.tool-bar button:hover {
+  background: lightcoral;
+}
