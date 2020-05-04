@@ -2,20 +2,20 @@ import React from "react";
 import { getMergeSortAnimations } from "../SortingAlgorithms/MergeSort.js";
 import { getBubbleSortAnimations } from "../SortingAlgorithms/BubbleSort.js";
 import { getQuickSortAnimations } from "../SortingAlgorithms/QuickSort.js";
-//import { getRadixSortAnimations } from "../SortingAlgorithms/RadixSort.js";
+import { getShellSortAnimations } from "../SortingAlgorithms/ShellSort.js";
 import "./SortingVisualizer.css";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 2;
+const ANIMATION_SPEED_MS = 10;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 100;
+const NUMBER_OF_ARRAY_BARS = 100; //must be even or shell has issues
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = "lightcoral";
+const PRIMARY_COLOR = "#f3a33a";
 
 // This is the color of array bars that are being compared throughout the animations.
-const SECONDARY_COLOR = "blue";
+const SECONDARY_COLOR = "white";
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
@@ -92,12 +92,10 @@ export default class SortingVisualizer extends React.Component {
 
   quickSort() {
     const animations = getQuickSortAnimations(this.state.array);
-    console.log(animations);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
       const isColorChange = i % 6 === 0 || i % 6 === 1;
       if (isColorChange) {
-        console.log(animations[i]);
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -116,8 +114,32 @@ export default class SortingVisualizer extends React.Component {
     }
   }
 
-  radixSort() {
-    //const animations = getRadixSortAnimations(this.state.array);
+  shellSort() {
+    const animations = getShellSortAnimations(this.state.array);
+    //console.log(animations);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = i % 4 !== 2 && i % 4 !== 3;
+      if (isColorChange) {
+        //updating compare color
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        //console.log("One: ", barOneIdx, "Two: ", barTwoIdx);
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        // swapping
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
   }
 
   render() {
@@ -125,21 +147,92 @@ export default class SortingVisualizer extends React.Component {
 
     return (
       <div className="wrapper">
-        <div className="tool-bar">
-          <button onClick={() => this.resetArray()}>Create New Array</button>
-          <button onClick={() => this.mergeSort()}>MergeSort</button>
-          <button onClick={() => this.bubbleSort()}>BubbleSort</button>
-          <button onClick={() => this.quickSort()}>QuickSort</button>
-          <button onClick={() => this.radixSort()}>RadixSort</button>
-        </div>
-        <div className="array-container">
-          {array.map((value, index) => (
-            <div
-              className="array-bar"
-              key={index}
-              style={{ height: `${value}px` }}
-            ></div>
-          ))}
+        <div className="body">
+          <header className="header">
+            <div id="heading-text">
+              <p> Date Created: 04/23/2020 </p>
+              <p> Last Updated: 05/04/2020 </p>
+              <p> &copy;2020. All Rights Reserved. </p>
+            </div>
+          </header>
+          <div className="content-wrapper">
+            <div className="title">
+              <h2> Sorting Algorithm Visualizer </h2>
+            </div>
+            <div className="tool-bar">
+              <p>
+                <button onClick={() => this.resetArray()}>
+                  <img
+                    src={require("../icons/Icon_New Array.png")}
+                    height="50"
+                    width="50"
+                    alt="New Array"
+                  />
+                </button>
+                <p>Make New Array</p>
+              </p>
+              <p>
+                <button onClick={() => this.mergeSort()}>
+                  <img
+                    src={require("../icons/Icon_MergeSort.png")}
+                    height="50"
+                    width="50"
+                    alt="MergeSort"
+                  />
+                </button>
+                <p>Merge Sort</p>
+              </p>
+              <p>
+                <button onClick={() => this.bubbleSort()}>
+                  <img
+                    src={require("../icons/Icon_BubbleSort.png")}
+                    height="50"
+                    width="50"
+                    alt="BubbleSort"
+                  />
+                </button>
+                <p>Bubble Sort</p>
+              </p>
+              <p>
+                <button onClick={() => this.quickSort()}>
+                  <img
+                    src={require("../icons/Icon_QuickSort.png")}
+                    height="50"
+                    width="50"
+                    alt="QuickSort"
+                  />
+                </button>
+                <p>Quick Sort</p>
+              </p>
+              <p>
+                <button onClick={() => this.shellSort()}>
+                  <img
+                    src={require("../icons/Icon_ShellSort.png")}
+                    height="50"
+                    width="50"
+                    alt="ShellSort"
+                  />
+                </button>
+                <p>Shell Sort</p>
+              </p>
+            </div>
+            <div className="array-container">
+              {array.map((value, index) => (
+                <div
+                  className="array-bar"
+                  key={index}
+                  style={{ height: `${value}px` }}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <footer className="footer">
+            <div id="footer-text">
+              <p> Date Created: 04/23/2020 </p>
+              <p> Last Updated: 05/04/2020 </p>
+              <p> &copy;2020. All Rights Reserved. </p>
+            </div>
+          </footer>
         </div>
       </div>
     );

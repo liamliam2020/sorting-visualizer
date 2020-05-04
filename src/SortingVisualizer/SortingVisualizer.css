@@ -1,12 +1,29 @@
+@font-face {
+  /* found from https://www.cufonfonts.com/font/menlo*/
+  font-family: "menlo";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Menlo-Regular.ttf");
+}
+
+@font-face {
+  /* found from https://www.onlinewebfonts.com/download/a6ffc5d72a96b65159e710ea6d258ba4 */
+  font-family: "menlo";
+  font-weight: bold;
+  font-style: bold;
+  src: url("../fonts/Menlo\ Bold.ttf");
+}
+
 .array-container {
   position: center;
   padding-top: 60px;
   left: 100px;
+  background-color: #1c1c1c;
 }
 
 .array-bar {
   width: 2px;
-  background-color: lightcoral;
+  background-color: #f3a33a;
   display: inline-block;
   margin: 0 1px;
 }
@@ -15,22 +32,85 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 50px;
-  background-color: grey;
+  background-color: #1c1c1c;
+  color: white;
+  font-family: menlo;
+  font-size: 10px;
 }
 
 .tool-bar button {
-  background: white;
+  background: #1c1c1c;
   border-style: hidden;
-  font-size: 16px;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 12px;
+  font-family: menlo;
   display: inline-block;
   margin-left: 25px;
   margin-right: 25px;
   cursor: pointer;
+  color: white;
 }
 
 .tool-bar button:hover {
-  background: lightcoral;
+  opacity: 25%;
+}
+
+.header {
+  font-size: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: menlo;
+  background-color: #1c1c1c;
+}
+
+body {
+  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+#heading-text {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 6px;
+}
+
+#footer-text {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  bottom: 0;
+  padding-top: 3%;
+  font-size: 6px;
+}
+
+.wrapper {
+  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+.title {
+  background-color: #1c1c1c;
+  color: white;
+  font-size: 20px;
+  font-family: menlo;
+  font-style: regular;
+  text-align: left;
+  padding-left: 20px;
+}
+
+footer {
+  flex-shrink: 0;
+  font-size: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: monospace;
+  background-color: #1c1c1c;
 }
