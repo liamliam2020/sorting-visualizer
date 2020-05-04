@@ -198,7 +198,7 @@ export default class SortingVisualizer extends React.Component {
                   <img
                     src={require("../icons/Icon_QuickSort.png")}
                     height="50"
-                    width="50"
+                    width="70"
                     alt="QuickSort"
                   />
                 </button>
