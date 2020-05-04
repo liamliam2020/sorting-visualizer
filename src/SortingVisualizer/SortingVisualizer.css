@@ -73,7 +73,7 @@ body {
   display: flex;
   justify-content: space-between;
   color: white;
-  font-size: 6px;
+  font-size: 8px;
 }
 
 #footer-text {
@@ -82,7 +82,7 @@ body {
   color: white;
   bottom: 0;
   padding-top: 3%;
-  font-size: 6px;
+  font-size: 8px;
 }
 
 .wrapper {
@@ -108,9 +108,17 @@ body {
 
 footer {
   flex-shrink: 0;
-  font-size: 8px;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: monospace;
+  font-family: menlo;
   background-color: #1c1c1c;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f3a33a;
 }

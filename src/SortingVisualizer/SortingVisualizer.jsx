@@ -6,10 +6,10 @@ import { getShellSortAnimations } from "../SortingAlgorithms/ShellSort.js";
 import "./SortingVisualizer.css";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 3;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 100; //must be even or shell has issues
+const NUMBER_OF_ARRAY_BARS = 250; //must be even or shell has issues
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = "#f3a33a";
@@ -150,8 +150,12 @@ export default class SortingVisualizer extends React.Component {
         <div className="body">
           <header className="header">
             <div id="heading-text">
-              <p> Date Created: 04/23/2020 </p>
               <p> Last Updated: 05/04/2020 </p>
+              <p>
+                <a href="https://github.com/liamliam2020/sorting-visualizer/tree/master">
+                  Github Source Code
+                </a>
+              </p>
               <p> &copy;2020. All Rights Reserved. </p>
             </div>
           </header>
@@ -228,8 +232,12 @@ export default class SortingVisualizer extends React.Component {
           </div>
           <footer className="footer">
             <div id="footer-text">
-              <p> Date Created: 04/23/2020 </p>
               <p> Last Updated: 05/04/2020 </p>
+              <p>
+                <a href="https://github.com/liamliam2020/sorting-visualizer/tree/master">
+                  Github Source Code
+                </a>
+              </p>
               <p> &copy;2020. All Rights Reserved. </p>
             </div>
           </footer>
