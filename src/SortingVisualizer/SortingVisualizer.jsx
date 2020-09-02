@@ -1,9 +1,9 @@
-import React from "react";
-import { getMergeSortAnimations } from "../SortingAlgorithms/MergeSort.js";
-import { getBubbleSortAnimations } from "../SortingAlgorithms/BubbleSort.js";
-import { getQuickSortAnimations } from "../SortingAlgorithms/QuickSort.js";
-import { getShellSortAnimations } from "../SortingAlgorithms/ShellSort.js";
-import "./SortingVisualizer.css";
+import React from 'react';
+import {getMergeSortAnimations} from '../SortingAlgorithms/MergeSort.js';
+import {getBubbleSortAnimations} from '../SortingAlgorithms/BubbleSort.js';
+import {getQuickSortAnimations} from '../SortingAlgorithms/QuickSort.js';
+import {getShellSortAnimations} from '../SortingAlgorithms/ShellSort.js';
+import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 3;
@@ -12,20 +12,21 @@ const ANIMATION_SPEED_MS = 3;
 const NUMBER_OF_ARRAY_BARS = 250; //must be even or shell has issues
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = "#f3a33a";
+const PRIMARY_COLOR = '#f3a33a';
 
 // This is the color of array bars that are being compared throughout the animations.
-const SECONDARY_COLOR = "white";
+const SECONDARY_COLOR = 'white';
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      array: []
+      array: [],
     };
   }
 
+  // reset on page load
   componentDidMount() {
     this.resetArray();
   }
@@ -36,14 +37,19 @@ export default class SortingVisualizer extends React.Component {
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
       array.push(randomIntfromRange(10, 500));
     }
-    this.setState({ array });
+    this.setState({array});
   }
 
   mergeSort() {
+    // call to js sorting algorithm
     const animations = getMergeSortAnimations(this.state.array);
+
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName("array-bar");
+      const arrayBars = document.getElementsByClassName('array-bar');
+      // to figure out if the animation is a bar changing color
       const isColorChange = i % 3 !== 2;
+
+      // change color if bar is being compared
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
@@ -55,6 +61,7 @@ export default class SortingVisualizer extends React.Component {
         }, i * ANIMATION_SPEED_MS);
       } else {
         setTimeout(() => {
+          // animate swaps
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
@@ -64,11 +71,15 @@ export default class SortingVisualizer extends React.Component {
   }
 
   bubbleSort() {
+    // call to js sorting algorithm
     const animations = getBubbleSortAnimations(this.state.array);
     console.log(animations);
+
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName("array-bar");
+      const arrayBars = document.getElementsByClassName('array-bar');
+      // to figure out if the animation is a bar changing color
       const isColorChange = i % 4 !== 2 && i % 4 !== 3;
+
       if (isColorChange) {
         //updating compare color
         const [barOneIdx, barTwoIdx] = animations[i];
@@ -80,7 +91,7 @@ export default class SortingVisualizer extends React.Component {
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
       } else {
-        // swapping
+        // animate swaps
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
@@ -91,11 +102,15 @@ export default class SortingVisualizer extends React.Component {
   }
 
   quickSort() {
+    // call to js sorting algorithm
     const animations = getQuickSortAnimations(this.state.array);
+
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName("array-bar");
+      const arrayBars = document.getElementsByClassName('array-bar');
+      // to figure out if the animation is a bar changing color
       const isColorChange = i % 6 === 0 || i % 6 === 1;
       if (isColorChange) {
+        //updating compare color
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -105,6 +120,7 @@ export default class SortingVisualizer extends React.Component {
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
       } else {
+        //animate swaps
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
@@ -115,16 +131,18 @@ export default class SortingVisualizer extends React.Component {
   }
 
   shellSort() {
+    // call to js sorting algorithm
     const animations = getShellSortAnimations(this.state.array);
-    //console.log(animations);
+
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName("array-bar");
+      const arrayBars = document.getElementsByClassName('array-bar');
+      // to figure out if the animation is a bar changing color
       const isColorChange = i % 4 !== 2 && i % 4 !== 3;
+
       if (isColorChange) {
         //updating compare color
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
-        //console.log("One: ", barOneIdx, "Two: ", barTwoIdx);
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
         setTimeout(() => {
@@ -132,7 +150,7 @@ export default class SortingVisualizer extends React.Component {
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
       } else {
-        // swapping
+        // animate swapping
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
@@ -142,8 +160,9 @@ export default class SortingVisualizer extends React.Component {
     }
   }
 
+  // entire site is just rendered here because I was new to react when I made this
   render() {
-    const { array } = this.state;
+    const {array} = this.state;
 
     return (
       <div className="wrapper">
@@ -167,7 +186,7 @@ export default class SortingVisualizer extends React.Component {
               <p>
                 <button onClick={() => this.resetArray()}>
                   <img
-                    src={require("../icons/Icon_New Array.png")}
+                    src={require('../icons/Icon_New Array.png')}
                     height="50"
                     width="50"
                     alt="New Array"
@@ -178,7 +197,7 @@ export default class SortingVisualizer extends React.Component {
               <p>
                 <button onClick={() => this.mergeSort()}>
                   <img
-                    src={require("../icons/Icon_MergeSort.png")}
+                    src={require('../icons/Icon_MergeSort.png')}
                     height="50"
                     width="50"
                     alt="MergeSort"
@@ -189,7 +208,7 @@ export default class SortingVisualizer extends React.Component {
               <p>
                 <button onClick={() => this.bubbleSort()}>
                   <img
-                    src={require("../icons/Icon_BubbleSort.png")}
+                    src={require('../icons/Icon_BubbleSort.png')}
                     height="50"
                     width="50"
                     alt="BubbleSort"
@@ -200,7 +219,7 @@ export default class SortingVisualizer extends React.Component {
               <p>
                 <button onClick={() => this.quickSort()}>
                   <img
-                    src={require("../icons/Icon_QuickSort.png")}
+                    src={require('../icons/Icon_QuickSort.png')}
                     height="50"
                     width="70"
                     alt="QuickSort"
@@ -211,7 +230,7 @@ export default class SortingVisualizer extends React.Component {
               <p>
                 <button onClick={() => this.shellSort()}>
                   <img
-                    src={require("../icons/Icon_ShellSort.png")}
+                    src={require('../icons/Icon_ShellSort.png')}
                     height="50"
                     width="50"
                     alt="ShellSort"
@@ -225,7 +244,7 @@ export default class SortingVisualizer extends React.Component {
                 <div
                   className="array-bar"
                   key={index}
-                  style={{ height: `${value}px` }}
+                  style={{height: `${value}px`}}
                 ></div>
               ))}
             </div>

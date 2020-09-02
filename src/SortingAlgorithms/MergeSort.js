@@ -1,3 +1,6 @@
+// performs merge sort on a given array and then
+// determines all the different bar moves to animate
+
 export function getMergeSortAnimations(array) {
   const animations = [];
   if (array.length <= 1) return array;

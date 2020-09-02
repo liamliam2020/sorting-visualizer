@@ -1,9 +1,12 @@
+// performs quick sort on a given array and then
+// determines all the different bar moves to animate
+
 export function getQuickSortAnimations(array) {
   const animations = [];
-  console.log(array);
+
   if (array.length <= 1) return array;
   quickSortHelper(array, 0, array.length - 1, animations);
-  console.log(array);
+
   return animations;
 }
 

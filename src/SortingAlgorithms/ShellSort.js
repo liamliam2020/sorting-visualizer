@@ -1,9 +1,12 @@
+// performs shell sort on a given array and then
+// determines all the different bar moves to animate
+
 export function getShellSortAnimations(array) {
   const animations = [];
-  console.log(array);
+
   if (array.length <= 1) return array;
   ShellSortHelper(array, array.length, animations);
-  console.log(array);
+
   return animations;
 }
 
@@ -35,12 +38,6 @@ function ShellSortHelper(array, length, animations) {
         animations.push([j, array[j]]);
         animations.push([j, array[j]]);
       }
-      //array[j] = targetValue;
     }
   }
-  /* if (length % 2 != 0) { // check for uneven array 
-    animations.push([0, 0]);
-    animations.push([0, 0]);
-    animations.push([0, 0]);
-  }*/
 }
