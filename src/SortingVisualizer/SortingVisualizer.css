@@ -1,17 +1,17 @@
 @font-face {
   /* found from https://www.cufonfonts.com/font/menlo*/
-  font-family: "menlo";
+  font-family: 'menlo';
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/Menlo-Regular.ttf");
+  src: url('../fonts/Menlo-Regular.ttf');
 }
 
 @font-face {
   /* found from https://www.onlinewebfonts.com/download/a6ffc5d72a96b65159e710ea6d258ba4 */
-  font-family: "menlo";
+  font-family: 'menlo';
   font-weight: bold;
   font-style: bold;
-  src: url("../fonts/Menlo\ Bold.ttf");
+  src: url('../fonts/Menlo\ Bold.ttf');
 }
 
 .array-container {
@@ -51,7 +51,7 @@
 }
 
 .tool-bar button:hover {
-  opacity: 25%;
+  opacity: 75%;
 }
 
 .header {
