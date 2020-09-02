@@ -51,7 +51,8 @@
 }
 
 .tool-bar button:hover {
-  opacity: 75%;
+  opacity: 25%;
+  color: #f3a33a;
 }
 
 .header {
